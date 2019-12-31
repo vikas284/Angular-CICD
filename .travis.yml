@@ -1,0 +1,7 @@
+sudo: required
+services:
+    - docker
+befor_install:
+    - 'docker build -t angular-cicd -f Dockerfile.dev .'
+script:
+    - 'docker run angular-cicd npm run test -- --coverage'
