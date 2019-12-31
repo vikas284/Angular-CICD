@@ -1,7 +1,23 @@
-sudo: required
-services:
-    - docker
-befor_install:
-    - 'docker build -t angular-cicd -f Dockerfile.dev .'
+dist: trusty
+sudo: false
+
+language: node_js
+node_js:
+  - '8'
+
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+
+cache:
+  directories:
+    - ./node_modules
+
+install:
+  - npm install
+
 script:
-    - 'docker run angular-cicd npm run test -- --coverage'
+  - npm run test -- --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
