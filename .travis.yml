@@ -21,3 +21,19 @@ install:
 
 script:
   - npm run test -- --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
+
+deploy:
+    edge: true
+    provider: elasticbeanstalk
+    region: "us-east-2"
+    app: "Angular-CICD"
+    env: "AngularCicd-env"
+    bucket_name: "elasticbeanstalk-us-east-2-890666223118"
+    bucket_path: "Angular-CICD"
+    on:
+      branch: master
+    access_key_id: $AWS_EBS_ACCESS_KEY
+    secret_access_key:
+     secure: "$AWS_EBS_SECRET_KEY"
+
+
